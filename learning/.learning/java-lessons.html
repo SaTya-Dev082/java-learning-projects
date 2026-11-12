@@ -1,0 +1,74 @@
+<div id="spring-study">
+ <div class="viz-row"><h2 id="study-title">Java OOP</h2><span id="study-count" class="tabular-nums" aria-live="polite">0/7 completed</span></div>
+ <div class="progress" role="progressbar" aria-label="វឌ្ឍនភាពមេរៀន" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar" style="width:0%"></div></div>
+ <div id="study-list"></div>
+ <fieldset id="study-next" hidden><legend>រៀនអ្វីបន្ទាប់?</legend><div id="study-choices"></div></fieldset>
+ <button type="button" class="btn btn-primary btn-block" id="study-go">ចាប់ផ្ដើម Class និង Object →</button>
+ <p id="study-status" aria-live="polite"></p>
+</div>
+<style>
+#spring-study,#spring-study #study-list,#spring-study #study-choices{display:grid;gap:calc(var(--font-size-base) * 1.25)}
+#spring-study .lesson-copy{display:grid;gap:calc(var(--font-size-base) * .5)}
+#spring-study .lesson-description{color:var(--muted-foreground)}
+#spring-study fieldset{border:0;padding:0;margin:0;min-width:0}
+#spring-study #study-choices{margin-top:calc(var(--font-size-base) * .5)}
+</style>
+<script>
+(() => {
+ const root=document.getElementById('spring-study'), q=id=>root.querySelector('#'+id);
+ const chapters=[
+ ['Java OOP',[
+ ['Class និង Object','យល់ពីគំរូ និងវត្ថុដែលបង្កើតពីគំរូ'],
+ ['Interface','យល់ពីកិច្ចសន្យាដែល Class ត្រូវអនុវត្ត'],
+ ['Composition','យល់ពីការផ្សំ Object ដើម្បីធ្វើការជាមួយគ្នា'],
+ ['Encapsulation','គ្រប់គ្រងការចូលប្រើទិន្នន័យរបស់ Object'],
+ ['Inheritance','យល់ពីការទទួលលក្ខណៈ និងមុខងារពី Class មេ'],
+ ['Polymorphism','ប្រើប្រភេទរួមជាមួយការអនុវត្តផ្សេងៗ'],
+ ['Abstraction','បង្ហាញមុខងារចាំបាច់ និងលាក់ព័ត៌មានលម្អិត']]],
+ ['Advanced Java',['Exception Handling','Generics','Collections','equals និង hashCode','Immutability']],
+ ['Modern Java',['Lambda','Functional Interface','Stream API','Optional','Date/Time API','Records']],
+ ['JVM និង Concurrency',['JVM','Stack និង Heap','Garbage Collection','Threads','Concurrency']],
+ ['ការរចនា និងឧបករណ៍',['SOLID','Dependency និង Coupling/Cohesion','Design Patterns','Maven','Git']],
+ ['Web និង Database',['Client/Server','HTTP និង JSON','REST','SQL និង Relationships','Indexes','Transactions']],
+ ['Spring Core',['IoC','Dependency Injection','Bean និង ApplicationContext','Configuration','Bean Scope','Bean Lifecycle']],
+ ['Spring Boot',['Auto-configuration','Starters','Embedded Server','Properties','Profiles']],
+ ['Backend API',['Spring MVC','Controller/Service/Repository','DTO','Validation','Error Handling']],
+ ['JPA និង Hibernate',['Entities និង Relationships','Transactions','Migrations','Pagination','N+1 Problem']],
+ ['Security និង Testing',['Authentication','Authorization','Spring Security','Password Hashing','Unit Tests','Integration Tests']],
+ ['ប្រព័ន្ធប្រើប្រាស់ពិត',['Logging','Monitoring','Docker','CI/CD','Deployment','Caching','Messaging']]
+ ].map(([title,items])=>({title,items:items.map(x=>Array.isArray(x)?{title:x[0],description:x[1]}:{title:x,description:'និយមន័យ → គោលបំណង → ឧទាហរណ៍ជីវិតពិត'})}));
+ const all=chapters.flatMap((c,ci)=>c.items.map((x,i)=>({...x,id:ci+':'+i,chapter:ci})));
+ let state={chapter:0,done:[],selected:'0:0'},busy=false;
+ function restore(saved){const s=saved?.privateContent;if(s&&Number.isInteger(s.chapter)&&chapters[s.chapter]&&Array.isArray(s.done))state={chapter:s.chapter,done:s.done.filter(id=>all.some(x=>x.id===id)),selected:all.some(x=>x.id===s.selected)?s.selected:'0:0'};render();}
+ function persist(){window.openai?.setWidgetState?.({modelContent:{completedTheory:all.filter(x=>state.done.includes(x.id)).map(x=>chapters[x.chapter].title+' / '+x.title),selectedLesson:all.find(x=>x.id===state.selected)?.title},privateContent:state})?.catch(()=>{});}
+ function candidates(){return all.filter(x=>!state.done.includes(x.id)).slice(0,3);}
+ function render(){
+  const chapter=chapters[state.chapter],count=chapter.items.filter((_,i)=>state.done.includes(state.chapter+':'+i)).length;
+  q('study-title').textContent=(state.chapter+1)+'. '+chapter.title;
+  q('study-count').textContent=count+'/'+chapter.items.length+' completed';
+  const percent=count/chapter.items.length*100,bar=root.querySelector('[role="progressbar"]');bar.setAttribute('aria-valuenow',Math.round(percent));bar.querySelector('.progress-bar').style.width=percent+'%';
+  q('study-list').replaceChildren();
+  chapter.items.forEach((item,i)=>{
+   const id=state.chapter+':'+i,label=document.createElement('label');label.className='form-check';
+   const input=document.createElement('input');input.type='checkbox';input.className='form-check-input';input.checked=state.done.includes(id);input.setAttribute('aria-label','បានយល់ទ្រឹស្ដី៖ '+item.title);
+   const copy=document.createElement('span');copy.className='form-check-label lesson-copy';
+   const title=document.createElement('span');title.textContent=(i+1)+'. '+item.title;
+   const desc=document.createElement('span');desc.className='lesson-description';desc.textContent=item.description;copy.append(title,desc);label.append(input,copy);q('study-list').append(label);
+   input.addEventListener('change',()=>{state.done=input.checked?[...new Set([...state.done,id])]:state.done.filter(x=>x!==id);state.selected=candidates()[0]?.id||id;persist();render();});
+  });
+  q('study-next').hidden=state.done.length===0;q('study-choices').replaceChildren();
+  candidates().forEach(item=>{const label=document.createElement('label');label.className='form-check';const radio=document.createElement('input');radio.type='radio';radio.name='next-java-lesson';radio.className='form-check-input';radio.checked=state.selected===item.id;const text=document.createElement('span');text.className='form-check-label';text.textContent=item.title;label.append(radio,text);q('study-choices').append(label);radio.addEventListener('change',()=>{state.selected=item.id;persist();render();});});
+  const selected=all.find(x=>x.id===state.selected);q('study-go').textContent=(state.done.length?'បន្តរៀន៖ ':'ចាប់ផ្ដើម៖ ')+(selected?.title||'Class និង Object')+' →';q('study-go').disabled=busy;
+ }
+ q('study-go').addEventListener('click',async()=>{
+  const selected=all.find(x=>x.id===state.selected);if(!selected)return;
+  busy=true;render();q('study-status').textContent='កំពុងស្នើមេរៀន…';
+  const completed=all.filter(x=>state.done.includes(x.id)).map(x=>chapters[x.chapter].title+' / '+x.title);
+  const prompt='បន្តផែនការរៀន Java → Spring → Spring Boot របស់យើង។ សូមបង្រៀន '+chapters[selected.chapter].title+' / '+selected.title+' ជាភាសាខ្មែរ ដោយពន្យល់និយមន័យ គោលបំណង និងឧទាហរណ៍ជីវិតពិត។ កុំចាប់ផ្ដើម Coding រហូតដល់ខ្ញុំស្នើ។ ខ្ញុំបានគូសបញ្ជាក់ថាយល់ទ្រឹស្ដីទាំងនេះ៖ '+(completed.join('; ')||'មិនទាន់មាន')+'។ សូមធ្វើបច្ចុប្បន្នភាព LEARNING_PROGRESS.md តាមការបញ្ជាក់នេះ កុំសន្មតថាបានអនុវត្ត Coding។ បង្ហាញផ្ទាំងតាមដានមេរៀនក្នុងឆាតបន្តជាមួយមេរៀននេះផង។';
+  try{if(!window.openai?.sendFollowUpMessage)throw new Error();await window.openai.sendFollowUpMessage({prompt,title:'បន្តរៀន '+selected.title});state.chapter=selected.chapter;persist();q('study-status').textContent='បានស្នើមេរៀន៖ '+selected.title;}
+  catch{q('study-status').textContent='មិនទាន់បានផ្ញើ។ សូមវាយក្នុងឆាត៖ បន្តរៀន '+selected.title;}
+  finally{busy=false;render();}
+ });
+ window.addEventListener('openai:set_globals',e=>{if(e.detail?.globals?.widgetState)restore(e.detail.globals.widgetState);});restore(window.openai?.widgetState);
+})();
+</script>

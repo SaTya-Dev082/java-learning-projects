@@ -1,0 +1,64 @@
+<div id="java-learning-tracker">
+  <h2>ដំណើរសិក្សា Java → Spring Boot</h2>
+  <p id="jp-count" class="text-muted" aria-live="polite"></p>
+  <div class="progress" role="progressbar" aria-label="មេរៀនបានបញ្ចប់" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0"><div class="progress-bar" style="width:0%"></div></div>
+  <div class="viz-row"><strong id="jp-current"></strong><button type="button" class="btn" id="jp-done">✓ ខ្ញុំបានបញ្ចប់ចំណុចនេះហើយ</button></div>
+  <fieldset><legend>ជ្រើសមេរៀនត្រូវរៀន</legend><div id="jp-options"></div></fieldset>
+  <div class="viz-row"><button type="button" class="btn btn-primary" id="jp-learn">ចាប់ផ្ដើមរៀនមេរៀនដែលបានជ្រើស</button></div>
+  <p id="jp-feedback" aria-live="polite"></p>
+</div>
+<style>
+#java-learning-tracker {display:grid;gap:calc(var(--font-size-base) * 1)}
+#java-learning-tracker fieldset {border:0;padding:0;margin:0;min-width:0}
+#java-learning-tracker #jp-options {display:grid;gap:calc(var(--font-size-base) * .5);margin-top:calc(var(--font-size-base) * .5)}
+</style>
+<script>
+(() => {
+const root = document.getElementById('java-learning-tracker');
+const topics = ['Class និង Object','Interface','Composition','Encapsulation','Inheritance','Polymorphism','Abstraction','Advanced Java','Modern Java','JVM និង Concurrency','SOLID, Design Patterns, Maven និង Git','Web និង SQL','Spring Core','Spring Boot','Backend API','JPA និង Hibernate','Security និង Testing','Deployment, Caching និង Messaging'];
+let state = {done:[], selected:0, current:0};
+const get = id => root.querySelector('#'+id);
+function apply(saved) {
+ const s = saved?.privateContent;
+ if (s && Array.isArray(s.done)) state = {done:[...new Set(s.done.filter(n=>Number.isInteger(n)&&n>=0&&n<topics.length))],selected:Number.isInteger(s.selected)&&s.selected>=0&&s.selected<topics.length?s.selected:0,current:Number.isInteger(s.current)&&s.current>=0&&s.current<topics.length?s.current:0};
+ render();
+}
+function save() {
+ window.openai?.setWidgetState?.({modelContent:{completedTopics:state.done.map(n=>topics[n]),selectedTopic:topics[state.selected],currentTopic:topics[state.current]},privateContent:state})?.catch(()=>{});
+}
+function render() {
+ get('jp-count').textContent = `បានបញ្ចប់ ${state.done.length} / ${topics.length} ចំណុច`;
+ get('jp-current').textContent = 'ចំណុចបច្ចុប្បន្ន៖ '+topics[state.current];
+ get('jp-done').disabled = state.done.includes(state.current);
+ const bar=root.querySelector('[role="progressbar"]');
+ bar.setAttribute('aria-valuenow',state.done.length);
+ bar.querySelector('.progress-bar').style.width=(state.done.length/topics.length*100)+'%';
+ get('jp-options').replaceChildren();
+ topics.forEach((topic,i)=>{
+  const label=document.createElement('label'); label.className='form-check';
+  const radio=document.createElement('input');radio.type='radio';radio.name='java-topic';radio.className='form-check-input';radio.value=i;radio.checked=i===state.selected;
+  radio.addEventListener('change',()=>{state.selected=i;save();});
+  const text=document.createElement('span');text.className='form-check-label';text.textContent=topic+(state.done.includes(i)?' — បានបញ្ចប់':'');
+  label.append(radio,text);get('jp-options').append(label);
+ });
+}
+get('jp-done').addEventListener('click',()=>{
+ if(!state.done.includes(state.current))state.done.push(state.current);
+ const next=topics.findIndex((_,i)=>i>state.current&&!state.done.includes(i));
+ const remaining=topics.findIndex((_,i)=>!state.done.includes(i));
+ state.selected=next>=0?next:remaining>=0?remaining:state.current;
+ save();render();get('jp-feedback').textContent='បានកត់ត្រាក្នុងផ្ទាំងនេះ។ ជ្រើសមេរៀន ហើយចុចចាប់ផ្ដើម ដើម្បីបន្ត និងផ្ញើវឌ្ឍនភាពទៅការសន្ទនា។';
+});
+get('jp-learn').addEventListener('click',async()=>{
+ state.current=state.selected;save();render();
+ const prompt='សូមបន្តផែនការសិក្សា Java → Spring Boot។ ខ្ញុំជ្រើសមេរៀន៖ '+topics[state.selected]+ '។ ចំណុចដែលខ្ញុំបានបញ្ជាក់ថាបញ្ចប់ទ្រឹស្ដី៖ '+(state.done.map(n=>topics[n]).join(', ')||'មិនទាន់មាន')+'។ សូមធ្វើបច្ចុប្បន្នភាព LEARNING_PROGRESS.md តាមនេះ ដោយកុំសន្មតថាបានអនុវត្ត Coding។ បង្រៀនមេរៀនដែលបានជ្រើសជាភាសាខ្មែរ៖ និយមន័យ គោលបំណង និងឧទាហរណ៍ជីវិតពិតសិន។ កុំសរសេរកូដ រហូតដល់ខ្ញុំស្នើ។';
+ try {
+  if(!window.openai?.sendFollowUpMessage)throw new Error('unavailable');
+  await window.openai.sendFollowUpMessage({prompt,title:'រៀន៖ '+topics[state.selected]});
+  get('jp-feedback').textContent='បានស្នើមេរៀន៖ '+topics[state.selected];
+ } catch {get('jp-feedback').textContent='មិនទាន់បានផ្ញើសំណើ។ សូមសរសេរក្នុងការសន្ទនា៖ រៀន '+topics[state.selected];}
+});
+window.addEventListener('openai:set_globals',event=>{if(event.detail?.globals?.widgetState)apply(event.detail.globals.widgetState);});
+apply(window.openai?.widgetState);
+})();
+</script>
