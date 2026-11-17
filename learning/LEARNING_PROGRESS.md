@@ -21,7 +21,8 @@
 - Polymorphism៖ អ្នករៀនបានឆ្លើយត្រូវអំពី runtime dispatch ទៅ Car។ បានបន្ថែម Demo និង Checks នៅ fundamentals/polymorphism។
 - Abstraction៖ អ្នករៀនបានឆ្លើយត្រូវថា Concrete Class អាចបង្កើត Object បាន។ បានបង្កើត shipping quote example និង Checks។
 - Interface៖ អ្នករៀនឆ្លើយត្រូវថា EmailNotification ត្រូវអនុវត្ត send()។ បានបង្កើត notification contract, console implementations និង order confirmation checks។
-- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Interface រួចរៀននិយមន័យ Composition។
+- Composition៖ បានពន្យល់ has-a និងកែការយល់ច្រឡំថា Payment ជា Order។ បានបង្កើត OrderService ដែល delegate ទៅ PaymentService និង Checks។
+- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Composition រំលឹក Java OOP រួចចូល Exception Handling។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -54,7 +55,7 @@
 | Polymorphism | បានយល់ | កំពុងធ្វើ | reference type vs object type, @Override, runtime dispatch; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Abstraction | បានយល់ | កំពុងធ្វើ | abstract class/method, concrete implementation, shared workflow; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Interface | បានយល់ | កំពុងធ្វើ | implements, public methods, interface reference និង constructor injection; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
-| Composition | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ | — |
+| Composition | កំពុងរៀន | កំពុងធ្វើ | has-a, delegation, constructor injection; រំលឹក Order មិនមែនជា Payment និងភាពខុសគ្នាជាមួយ UML ownership |
 
 ## ប្រវត្តិសិក្សា
 
@@ -66,3 +67,4 @@
 | 2026-11-17 | Polymorphism: parent references and mixed fleet | Demo និង runtime dispatch checks ជោគជ័យ | អនុវត្ត Polymorphism រួចបន្ត Abstraction |
 | 2026-11-17 | Abstraction: Standard/Express shipping quotes | Demo និង pricing/validation checks ជោគជ័យ | អនុវត្ត Abstraction រួចបន្ត Interface |
 | 2026-11-17 | Interface: Email/SMS notification contract | Console Demo និង confirmation/validation checks ជោគជ័យ | អនុវត្ត Interface រួចបន្ត Composition |
+| 2026-11-17 | Composition: OrderService uses PaymentService | Demo និង delegation/decline/validation checks ជោគជ័យ | អនុវត្ត Composition រំលឹក OOP រួចចូល Exception Handling |
