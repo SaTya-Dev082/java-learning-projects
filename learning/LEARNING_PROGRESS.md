@@ -18,7 +18,8 @@
 - Encapsulation៖ អ្នករៀនបានយល់គោលបំណងការពារ State។ បានបង្កើត Product, EncapsulationDemo និងផ្ទៀងផ្ទាត់ច្បាប់ស្តុក។ អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង។
 - លំដាប់ត្រឹមត្រូវ៖ Class/Object → Encapsulation → Inheritance → Polymorphism → Abstraction → Interface → Composition។
 - Inheritance៖ បានពន្យល់ is-a និងកែការយល់ច្រឡំជាមួយ has-a។ បានបង្កើត និងដំណើរការ Vehicle/Car/Motorcycle។
-- ជំហានបន្ទាប់៖ ពិនិត្យកូដ Inheritance រួចរៀននិយមន័យ Polymorphism។
+- Polymorphism៖ អ្នករៀនបានឆ្លើយត្រូវអំពី runtime dispatch ទៅ Car។ បានបន្ថែម Demo និង Checks នៅ fundamentals/polymorphism។
+- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Polymorphism រួចរៀននិយមន័យ Abstraction។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -48,7 +49,7 @@
 | Class និង Object | បានយល់ | កំពុងធ្វើ | ពិនិត្យ Constructor, this, references និង Object identity ក្នុងឧទាហរណ៍ |
 | Encapsulation | បានយល់ | កំពុងធ្វើ | private fields, getters, validation និងការរក្សា State ពេលបដិសេធ |
 | Inheritance | កំពុងរៀន | កំពុងធ្វើ | ពិនិត្យ is-a, extends, super, private fields និង inherited methods; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
-| Polymorphism | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ | — |
+| Polymorphism | បានយល់ | កំពុងធ្វើ | reference type vs object type, @Override, runtime dispatch; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Abstraction | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ | — |
 | Interface | កំពុងរៀន | មិនទាន់ធ្វើ | បានណែនាំនិយមន័យបន្តិច ត្រូវរៀនតាមលំដាប់ក្រោយ Abstraction |
 | Composition | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ | — |
@@ -60,3 +61,4 @@
 | 2026-11-11 | បង្កើតផែនការតាមដានការសិក្សា | បានព្រមព្រៀងលំដាប់មេរៀន និងរបៀបរៀន | ចាប់ផ្ដើមនិយមន័យ Class និង Object |
 | 2026-11-17 | Encapsulation: Product stock | បានយល់ទ្រឹស្ដី; Demo និង stock checks ដំណើរការជោគជ័យ | អនុវត្តកូដ រួចបន្ត Inheritance |
 | 2026-11-17 | Inheritance: Vehicle/Car/Motorcycle | Demo compile និងដំណើរការជោគជ័យ | អនុវត្ត Inheritance រួចបន្ត Polymorphism |
+| 2026-11-17 | Polymorphism: parent references and mixed fleet | Demo និង runtime dispatch checks ជោគជ័យ | អនុវត្ត Polymorphism រួចបន្ត Abstraction |
