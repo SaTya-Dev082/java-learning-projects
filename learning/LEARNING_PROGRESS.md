@@ -20,7 +20,8 @@
 - Inheritance៖ បានពន្យល់ is-a និងកែការយល់ច្រឡំជាមួយ has-a។ បានបង្កើត និងដំណើរការ Vehicle/Car/Motorcycle។
 - Polymorphism៖ អ្នករៀនបានឆ្លើយត្រូវអំពី runtime dispatch ទៅ Car។ បានបន្ថែម Demo និង Checks នៅ fundamentals/polymorphism។
 - Abstraction៖ អ្នករៀនបានឆ្លើយត្រូវថា Concrete Class អាចបង្កើត Object បាន។ បានបង្កើត shipping quote example និង Checks។
-- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Abstraction រួចរៀននិយមន័យ Interface។
+- Interface៖ អ្នករៀនឆ្លើយត្រូវថា EmailNotification ត្រូវអនុវត្ត send()។ បានបង្កើត notification contract, console implementations និង order confirmation checks។
+- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Interface រួចរៀននិយមន័យ Composition។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -52,7 +53,7 @@
 | Inheritance | កំពុងរៀន | កំពុងធ្វើ | ពិនិត្យ is-a, extends, super, private fields និង inherited methods; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Polymorphism | បានយល់ | កំពុងធ្វើ | reference type vs object type, @Override, runtime dispatch; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Abstraction | បានយល់ | កំពុងធ្វើ | abstract class/method, concrete implementation, shared workflow; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
-| Interface | កំពុងរៀន | មិនទាន់ធ្វើ | បានណែនាំនិយមន័យបន្តិច ត្រូវរៀនតាមលំដាប់ក្រោយ Abstraction |
+| Interface | បានយល់ | កំពុងធ្វើ | implements, public methods, interface reference និង constructor injection; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Composition | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ | — |
 
 ## ប្រវត្តិសិក្សា
@@ -64,3 +65,4 @@
 | 2026-11-17 | Inheritance: Vehicle/Car/Motorcycle | Demo compile និងដំណើរការជោគជ័យ | អនុវត្ត Inheritance រួចបន្ត Polymorphism |
 | 2026-11-17 | Polymorphism: parent references and mixed fleet | Demo និង runtime dispatch checks ជោគជ័យ | អនុវត្ត Polymorphism រួចបន្ត Abstraction |
 | 2026-11-17 | Abstraction: Standard/Express shipping quotes | Demo និង pricing/validation checks ជោគជ័យ | អនុវត្ត Abstraction រួចបន្ត Interface |
+| 2026-11-17 | Interface: Email/SMS notification contract | Console Demo និង confirmation/validation checks ជោគជ័យ | អនុវត្ត Interface រួចបន្ត Composition |
