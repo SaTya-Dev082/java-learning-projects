@@ -19,7 +19,8 @@
 - លំដាប់ត្រឹមត្រូវ៖ Class/Object → Encapsulation → Inheritance → Polymorphism → Abstraction → Interface → Composition។
 - Inheritance៖ បានពន្យល់ is-a និងកែការយល់ច្រឡំជាមួយ has-a។ បានបង្កើត និងដំណើរការ Vehicle/Car/Motorcycle។
 - Polymorphism៖ អ្នករៀនបានឆ្លើយត្រូវអំពី runtime dispatch ទៅ Car។ បានបន្ថែម Demo និង Checks នៅ fundamentals/polymorphism។
-- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Polymorphism រួចរៀននិយមន័យ Abstraction។
+- Abstraction៖ អ្នករៀនបានឆ្លើយត្រូវថា Concrete Class អាចបង្កើត Object បាន។ បានបង្កើត shipping quote example និង Checks។
+- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Abstraction រួចរៀននិយមន័យ Interface។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -50,7 +51,7 @@
 | Encapsulation | បានយល់ | កំពុងធ្វើ | private fields, getters, validation និងការរក្សា State ពេលបដិសេធ |
 | Inheritance | កំពុងរៀន | កំពុងធ្វើ | ពិនិត្យ is-a, extends, super, private fields និង inherited methods; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Polymorphism | បានយល់ | កំពុងធ្វើ | reference type vs object type, @Override, runtime dispatch; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
-| Abstraction | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ | — |
+| Abstraction | បានយល់ | កំពុងធ្វើ | abstract class/method, concrete implementation, shared workflow; អ្នករៀនមិនទាន់បញ្ជាក់ការអនុវត្តដោយខ្លួនឯង |
 | Interface | កំពុងរៀន | មិនទាន់ធ្វើ | បានណែនាំនិយមន័យបន្តិច ត្រូវរៀនតាមលំដាប់ក្រោយ Abstraction |
 | Composition | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ | — |
 
@@ -62,3 +63,4 @@
 | 2026-11-17 | Encapsulation: Product stock | បានយល់ទ្រឹស្ដី; Demo និង stock checks ដំណើរការជោគជ័យ | អនុវត្តកូដ រួចបន្ត Inheritance |
 | 2026-11-17 | Inheritance: Vehicle/Car/Motorcycle | Demo compile និងដំណើរការជោគជ័យ | អនុវត្ត Inheritance រួចបន្ត Polymorphism |
 | 2026-11-17 | Polymorphism: parent references and mixed fleet | Demo និង runtime dispatch checks ជោគជ័យ | អនុវត្ត Polymorphism រួចបន្ត Abstraction |
+| 2026-11-17 | Abstraction: Standard/Express shipping quotes | Demo និង pricing/validation checks ជោគជ័យ | អនុវត្ត Abstraction រួចបន្ត Interface |
