@@ -26,7 +26,9 @@
 - Composition៖ បានពន្យល់ has-a និងកែការយល់ច្រឡំថា Payment ជា Order។ បានបង្កើត OrderService ដែល delegate ទៅ PaymentService និង Checks។
 - Exception Handling៖ បានរៀននិយមន័យ Checked/Unchecked, throws, Custom Exceptions និង try-with-resources។ បានអនុវត្ត throw/propagation/try-catch ជាមួយស្តុក។
 - Exception Handling whole session៖ មានកូដ Checked/Unchecked, throws, custom exception, propagation, try/catch/finally, file try-with-resources, cause/stack trace និង suppressed exceptions។ Demo និង checks ជោគជ័យ។
-- ជំហានបន្ទាប់៖ អ្នករៀនពិនិត្យ whole-session demo និងពន្យល់លំហូរ មុនបន្ត Generics។ មិនទាន់បញ្ជាក់ថាអនុវត្តដោយខ្លួនឯងបញ្ចប់ទេ។
+- Generics៖ បានរៀនគ្រប់ចំណុចក្នុង session និងបង្កើត whole-session demo, runtime checks និង compile rejection checks។
+- និយមន័យខ្លីពីមេរៀនដំបូង៖ SHORT_DEFINITIONS_KH.md។
+- ជំហានបន្ទាប់៖ អ្នករៀនពិនិត្យ និងអនុវត្ត Generics មុនបន្ត Collections។ មិនទាន់បញ្ជាក់ថាអនុវត្តដោយខ្លួនឯងបញ្ចប់ទេ។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -74,3 +76,12 @@
 | 2026-11-17 | Composition: OrderService uses PaymentService | Demo និង delegation/decline/validation checks ជោគជ័យ | អនុវត្ត Composition រំលឹក OOP រួចចូល Exception Handling |
 | 2026-11-19 | throw/propagation/try-catch: stock requests | Demo និង checks ជោគជ័យ; មិនទាន់បញ្ជាក់ការអនុវត្តដោយអ្នករៀន | ពិនិត្យកូដ រួច finally និង Stack Trace/Cause |
 | 2026-11-19 | Exception Handling whole-session implementation | File imports, finally, cause/stack trace, close order និង suppressed checks ជោគជ័យ | ពិនិត្យកូដទាំងមូល រួចបន្ត Generics |
+| 2026-11-19 | Generics whole session + short definitions from first lesson | Demo/runtime checks និង compile rejection 12 ករណីជោគជ័យ | ពិនិត្យ Generics រួចបន្ត Collections |
+
+## មេរៀនលម្អិត៖ Generics
+
+- បានពន្យល់៖ Type safety, Generic Classes/Interfaces/Methods, inference/diamond, bounds, invariance, wildcards/PECS, raw types/erasure និងការប្រើក្នុង Project។
+- អ្នករៀនបានឆ្លើយត្រូវអំពី validation, type safety, bounds និង raw vs wildcard; wildcard read/write គួររំលឹកតាម Demo។
+- កូដ៖ advanced/generics/GenericsDemo.java និង README.md។
+- ផ្ទៀងផ្ទាត់៖ python3 scripts/check-generics.py ពី folder learning។
+- ការអនុវត្តដោយអ្នករៀន៖ កំពុងធ្វើ មិនទាន់បញ្ជាក់ថាបញ្ចប់។
