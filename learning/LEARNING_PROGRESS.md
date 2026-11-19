@@ -10,6 +10,8 @@
 - កត់ត្រាការយល់ទ្រឹស្ដី និងការអនុវត្តដោយឡែកពីគ្នា។ មិនសន្មតថាបានយល់ដោយសារតែបានពន្យល់រួចទេ។
 - ធ្វើបច្ចុប្បន្នភាពឯកសារនេះពេលបញ្ចប់មេរៀន ឬពេលអ្នករៀនបញ្ជាក់ពីវឌ្ឍនភាព។
 
+- សម្រាប់គ្រប់មេរៀនបន្ត៖ ពន្យល់និយមន័យ ចំណុចរង ការប្រើញឹកញាប់ និងបរិបទ Project ពិត។ ពេល Coding ពន្យល់តួនាទីកូដ លំហូរជោគជ័យ/កំហុស និងលទ្ធផល បន្ទាប់មកសាកល្បង និង push។
+
 ## ស្ថានភាពបច្ចុប្បន្ន
 
 - បានព្រមព្រៀងលើផែនការសិក្សា។
@@ -22,7 +24,8 @@
 - Abstraction៖ អ្នករៀនបានឆ្លើយត្រូវថា Concrete Class អាចបង្កើត Object បាន។ បានបង្កើត shipping quote example និង Checks។
 - Interface៖ អ្នករៀនឆ្លើយត្រូវថា EmailNotification ត្រូវអនុវត្ត send()។ បានបង្កើត notification contract, console implementations និង order confirmation checks។
 - Composition៖ បានពន្យល់ has-a និងកែការយល់ច្រឡំថា Payment ជា Order។ បានបង្កើត OrderService ដែល delegate ទៅ PaymentService និង Checks។
-- ជំហានបន្ទាប់៖ ពិនិត្យ និងអនុវត្ត Composition រំលឹក Java OOP រួចចូល Exception Handling។
+- Exception Handling៖ បានរៀននិយមន័យ Checked/Unchecked, throws, Custom Exceptions និង try-with-resources។ បានអនុវត្ត throw/propagation/try-catch ជាមួយស្តុក។
+- ជំហានបន្ទាប់៖ ពិនិត្យ propagation demo រួចបន្ត finally, Stack Trace/Cause និងការប្រើប្រាស់ល្អ។ Checked I/O និង try-with-resources មិនទាន់អនុវត្តជាកូដ។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -33,7 +36,7 @@
 | ល.រ. | ប្រធានបទ | ទ្រឹស្ដី | ការអនុវត្ត |
 |---|---|---|---|
 | 1 | Java OOP: Class, Object, Encapsulation, Inheritance, Polymorphism, Abstraction, Interface, Composition | កំពុងរៀន | កំពុងធ្វើ |
-| 2 | Advanced Java: Exceptions, Generics, Collections, equals/hashCode, Immutability | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ |
+| 2 | Advanced Java: Exceptions, Generics, Collections, equals/hashCode, Immutability | កំពុងរៀន | កំពុងធ្វើ |
 | 3 | Modern Java: Lambda, Functional Interface, Streams, Optional, Date/Time, Records | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ |
 | 4 | JVM, Stack/Heap, Garbage Collection, Threads, Concurrency | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ |
 | 5 | SOLID, Dependencies, Coupling/Cohesion, Design Patterns, Maven, Git | មិនទាន់ចាប់ផ្ដើម | មិនទាន់ធ្វើ |
@@ -68,3 +71,4 @@
 | 2026-11-17 | Abstraction: Standard/Express shipping quotes | Demo និង pricing/validation checks ជោគជ័យ | អនុវត្ត Abstraction រួចបន្ត Interface |
 | 2026-11-17 | Interface: Email/SMS notification contract | Console Demo និង confirmation/validation checks ជោគជ័យ | អនុវត្ត Interface រួចបន្ត Composition |
 | 2026-11-17 | Composition: OrderService uses PaymentService | Demo និង delegation/decline/validation checks ជោគជ័យ | អនុវត្ត Composition រំលឹក OOP រួចចូល Exception Handling |
+| 2026-11-19 | throw/propagation/try-catch: stock requests | Demo និង checks ជោគជ័យ; មិនទាន់បញ្ជាក់ការអនុវត្តដោយអ្នករៀន | ពិនិត្យកូដ រួច finally និង Stack Trace/Cause |
