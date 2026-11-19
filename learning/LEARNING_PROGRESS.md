@@ -25,7 +25,8 @@
 - Interface៖ អ្នករៀនឆ្លើយត្រូវថា EmailNotification ត្រូវអនុវត្ត send()។ បានបង្កើត notification contract, console implementations និង order confirmation checks។
 - Composition៖ បានពន្យល់ has-a និងកែការយល់ច្រឡំថា Payment ជា Order។ បានបង្កើត OrderService ដែល delegate ទៅ PaymentService និង Checks។
 - Exception Handling៖ បានរៀននិយមន័យ Checked/Unchecked, throws, Custom Exceptions និង try-with-resources។ បានអនុវត្ត throw/propagation/try-catch ជាមួយស្តុក។
-- ជំហានបន្ទាប់៖ ពិនិត្យ propagation demo រួចបន្ត finally, Stack Trace/Cause និងការប្រើប្រាស់ល្អ។ Checked I/O និង try-with-resources មិនទាន់អនុវត្តជាកូដ។
+- Exception Handling whole session៖ មានកូដ Checked/Unchecked, throws, custom exception, propagation, try/catch/finally, file try-with-resources, cause/stack trace និង suppressed exceptions។ Demo និង checks ជោគជ័យ។
+- ជំហានបន្ទាប់៖ អ្នករៀនពិនិត្យ whole-session demo និងពន្យល់លំហូរ មុនបន្ត Generics។ មិនទាន់បញ្ជាក់ថាអនុវត្តដោយខ្លួនឯងបញ្ចប់ទេ។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -72,3 +73,4 @@
 | 2026-11-17 | Interface: Email/SMS notification contract | Console Demo និង confirmation/validation checks ជោគជ័យ | អនុវត្ត Interface រួចបន្ត Composition |
 | 2026-11-17 | Composition: OrderService uses PaymentService | Demo និង delegation/decline/validation checks ជោគជ័យ | អនុវត្ត Composition រំលឹក OOP រួចចូល Exception Handling |
 | 2026-11-19 | throw/propagation/try-catch: stock requests | Demo និង checks ជោគជ័យ; មិនទាន់បញ្ជាក់ការអនុវត្តដោយអ្នករៀន | ពិនិត្យកូដ រួច finally និង Stack Trace/Cause |
+| 2026-11-19 | Exception Handling whole-session implementation | File imports, finally, cause/stack trace, close order និង suppressed checks ជោគជ័យ | ពិនិត្យកូដទាំងមូល រួចបន្ត Generics |
