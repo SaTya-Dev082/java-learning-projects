@@ -9,6 +9,7 @@
 - ចាប់ផ្ដើម Coding នៅពេលអ្នករៀនប្រាប់ថាយល់ និងចង់អនុវត្ត។
 - កត់ត្រាការយល់ទ្រឹស្ដី និងការអនុវត្តដោយឡែកពីគ្នា។ មិនសន្មតថាបានយល់ដោយសារតែបានពន្យល់រួចទេ។
 - ធ្វើបច្ចុប្បន្នភាពឯកសារនេះពេលបញ្ចប់មេរៀន ឬពេលអ្នករៀនបញ្ជាក់ពីវឌ្ឍនភាព។
+- មេរៀននីមួយៗត្រូវមាននិយមន័យ Syntax និងឧទាហរណ៍។ ពេលស្នើអនុវត្តកូដ គ្របដណ្ដប់គ្រប់ចំណុចក្នុង session ហើយសង្ខេបក្នុង SHORT_DEFINITIONS_KH.md តាមលេខធំ/រង (1, 1.1...) ជាមួយការប្រើប្រាស់ និងចំណុចប្រុងប្រយ័ត្ន។
 
 - សម្រាប់គ្រប់មេរៀនបន្ត៖ ពន្យល់និយមន័យ ចំណុចរង ការប្រើញឹកញាប់ និងបរិបទ Project ពិត។ ពេល Coding ពន្យល់តួនាទីកូដ លំហូរជោគជ័យ/កំហុស និងលទ្ធផល បន្ទាប់មកសាកល្បង និង push។
 
@@ -77,6 +78,7 @@
 | 2026-11-19 | throw/propagation/try-catch: stock requests | Demo និង checks ជោគជ័យ; មិនទាន់បញ្ជាក់ការអនុវត្តដោយអ្នករៀន | ពិនិត្យកូដ រួច finally និង Stack Trace/Cause |
 | 2026-11-19 | Exception Handling whole-session implementation | File imports, finally, cause/stack trace, close order និង suppressed checks ជោគជ័យ | ពិនិត្យកូដទាំងមូល រួចបន្ត Generics |
 | 2026-11-19 | Generics whole session + short definitions from first lesson | Demo/runtime checks និង compile rejection 12 ករណីជោគជ័យ | ពិនិត្យ Generics រួចបន្ត Collections |
+| 2026-11-20 | រៀបចំកំណត់ត្រាឡើងវិញតាមទម្រង់លេខធំ/លេខរង | 9 ផ្នែកធំ និង 57 ចំណុចរង មាននិយមន័យ Syntax និងឧទាហរណ៍ | រំលឹក Generics មុនចូល Collections |
 
 ## មេរៀនលម្អិត៖ Generics
 
