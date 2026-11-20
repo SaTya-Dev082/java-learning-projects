@@ -1,6 +1,6 @@
 # កំណត់ត្រាសង្ខេប — Java → Spring → Spring Boot
 
-បានធ្វើបច្ចុប្បន្នភាព៖ 2026-11-20។ គ្របដណ្ដប់មេរៀនដែលបានពន្យល់ និងមានកូដ៖ Java OOP, Exception Handling និង Generics។
+បានធ្វើបច្ចុប្បន្នភាព៖ 2026-11-20។ គ្របដណ្ដប់ Java OOP, Exception Handling, Generics និង Collections។ Collections ចំណុច 6–12 រៀនតាម note និងកូដតាមសំណើអ្នករៀន។
 នេះមិនមែនជាការបញ្ជាក់ថាអ្នករៀនបានអនុវត្តដោយខ្លួនឯងគ្រប់ចំណុចទេ។
 
 **របៀបអាន៖** ឧទាហរណ៍ខ្លះជា Class ពេញ ខ្លះជា Method ឬ Statements ដែលត្រូវដាក់ក្នុង Class/main ដែលពាក់ព័ន្ធ។ Class ឈ្មោះដូចគ្នាក្នុងមេរៀនផ្សេងគ្នាជាឧទាហរណ៍ដាច់ដោយឡែក មិនត្រូវ Copy ទាំងអស់ក្នុង File តែមួយទេ។ Collection examples ប្រើ `java.util.List` និង `java.util.ArrayList`; file examples ប្រើ imports ពី `java.io` និង `java.nio.file` តាមកូដ Project។
@@ -938,8 +938,365 @@ values.add(3); // Compile បាន; Runtime UnsupportedOperationException
 
 **ចំណុចគន្លឹះ៖** ប្រើប្រភេទច្បាស់ ជៀស Raw Types; ប្រើ Bound ពេលត្រូវការមុខងាររួម; ប្រើ PECS តាមទិសទិន្នន័យ; បែងចែក Type Safety ពី Validation និង Mutability។
 
+## 10. Collections
+
+**និយមន័យ៖** Java Collections Framework ជាសំណុំ Interfaces, Classes និងមុខងារសម្រាប់រក្សា ស្វែងរក កែ និងរៀបចំក្រុមទិន្នន័យ។
+
+**ស្ថានភាព៖** ចំណុច 1–5 បានពន្យល់ក្នុងឆាត។ តាមសំណើអ្នករៀន ចំណុច 6–12 បង្ហាញជានិយមន័យខ្លី និងកូដ ដោយមិនទាន់ពិនិត្យការយល់លម្អិត។
+**កូដមេរៀន៖** `advanced/collections/CollectionsDemo.java`; workflow ហាងក្នុង `StoreCollectionsDemo.java`។
+
+### 10.1. Collection, Collections និង Map
+
+**និយមន័យ៖** Collection<E> ជា Interface មូលដ្ឋានរបស់ List/Set/Queue។ Collections ជា Utility Class។ Map<K,V> រក្សា Key–Value ហើយមិន extend Collection។
+
+```java
+List<String> names = new ArrayList<>();
+Map<String, Integer> stocks = new HashMap<>();
+Collections.sort(names);
+```
+
+**ការប្រើប្រាស់៖** ជ្រើសកិច្ចសន្យាតាមតម្រូវការ ហើយប្រើ implementation សមស្រប។
+
+### 10.2. Array និង ArrayList
+
+**និយមន័យ៖** Array មានទំហំថេរក្រោយបង្កើត; ArrayList គ្រប់គ្រងទំហំដែលអាចប្រែប្រួល។
+
+```java
+String[] array = new String[2];
+List<String> list = new ArrayList<>(100);
+list.add("Coffee");
+System.out.println(array.length); // 2
+System.out.println(list.size());  // 1, មិនមែន 100
+```
+
+**ចំណាំ៖** 100 ជា Initial Capacity មិនមែនចំនួន Elements ឬទំហំអតិបរមា។ Array ទទួល primitives បាន; Generic List ប្រើ Wrappers ដូចជា Integer។
+
+### 10.3. List Operations និង Index
+
+**និយមន័យ៖** List មានលំដាប់តាមទីតាំង អនុញ្ញាតស្ទួន ហើយ Index ចាប់ពី 0។
+
+```java
+List<String> items = new ArrayList<>();
+items.add("Coffee");
+items.add(1, "Tea");
+items.set(0, "Milk");
+String first = items.get(0); // Milk
+items.remove("Tea");
+boolean exists = items.contains("Milk");
+```
+
+**ចំណាំ៖** add(index) បន្ថែម និងរំកិល Elements; set ជំនួសដោយ size ដដែល។ get/set/remove index ត្រូវ < size; add index អាច == size។ clear លុបទាំងអស់; isEmpty ពិនិត្យភាពទទេ។
+
+### 10.4. remove Index vs Value
+
+**និយមន័យ៖** remove(int) លុបតាមទីតាំង; remove(Object) លុបតម្លៃស្មើគ្នាដំបូង។
+
+```java
+List<Integer> values = new ArrayList<>(List.of(10, 20, 30));
+values.remove(1);                    // [10, 30]
+values.remove(Integer.valueOf(10));  // [30]
+```
+
+**ការប្រើប្រាស់៖** ប្រយ័ត្នពេល List<Integer> ព្រោះ literal int ជ្រើស Index overload។
+
+### 10.5. LinkedList
+
+**និយមន័យ៖** រក្សា Elements ក្នុង Nodes ដែលមានតំណមុន/ក្រោយ; អនុវត្តទាំង List និង Deque។
+
+```java
+Deque<String> tasks = new LinkedList<>();
+tasks.addFirst("Check payment");
+tasks.addLast("Pack");
+String first = tasks.removeFirst();
+```
+
+**ចំណាំ៖** ចុងទាំងពីរ O(1); get(index) O(n) ព្រោះត្រូវដើរតាម Nodes។ បញ្ចូលកណ្ដាលមិនលឿនជានិច្ច ព្រោះត្រូវរកទីតាំងជាមុន។ បើ Iterator នៅទីតាំងស្រាប់ ការបញ្ចូល/លុបត្រង់នោះអាច O(1)។ ជាទូទៅ Queue/Stack ពិចារណា ArrayDeque មុន។
+
+### 10.6. Set និង HashSet
+
+**និយមន័យ៖** Set មិនរក្សា Elements ស្ទួន។ HashSet ប្រើ hashCode/equals ហើយមិនធានាលំដាប់។
+
+```java
+Set<String> codes = new HashSet<>();
+codes.add("A");                  // true
+codes.add("B");                  // true
+boolean added = codes.add("A");  // false; size = 2
+```
+
+**ចំណាំ៖** ស្ទួនមិនលុបតម្លៃចាស់។ contains/remove ពិនិត្យតាមសមភាព។ Set គ្មាន get(index)។ In-memory dedup មិនជំនួស Database Unique Constraint។
+
+### 10.7. LinkedHashSet
+
+**និយមន័យ៖** មិនរក្សាស្ទួន ហើយរក្សាលំដាប់បញ្ចូលដំបូង។
+
+```java
+Set<String> codes = new LinkedHashSet<>(List.of("C", "A", "C", "B"));
+System.out.println(codes); // [C, A, B]
+```
+
+**ការប្រើប្រាស់៖** លុបកូដស្ទួនក្នុង input ដោយរក្សាលំដាប់ដើម។ add ធម្មតាលើតម្លៃដែលមានរួចមិនផ្លាស់ទីវា។
+
+### 10.8. TreeSet និង NavigableSet
+
+**និយមន័យ៖** TreeSet រៀប Elements តាម Comparable ឬ Comparator; compare == 0 ចាត់ទុកថាស្ទួន។
+
+```java
+NavigableSet<Integer> values = new TreeSet<>(List.of(30, 10, 20));
+System.out.println(values);   // [10, 20, 30]
+Integer lower = values.lower(20);     // 10
+Integer floor = values.floor(20);     // 20
+Integer ceiling = values.ceiling(25); // 30
+Integer higher = values.higher(20);   // 30
+```
+
+**ចំណាំ៖** first/last បោះ NoSuchElementException ពេលទទេ; navigation methods return null បើរកមិនឃើញ។ Natural ordering មិនទទួល null។ Comparator គួរស្រប equals។
+
+### 10.9. Map និង HashMap
+
+**និយមន័យ៖** Map រក្សាគូ Key–Value; Key មិនស្ទួន តែ Values អាចស្ទួន។ HashMap ប្រើ Hashing មិនធានាលំដាប់។
+
+```java
+Map<String, Integer> stocks = new HashMap<>();
+stocks.put("A", 10);
+Integer old = stocks.put("A", 30); // old = 10
+Integer current = stocks.get("A"); // 30; size = 1
+```
+
+**ចំណាំ៖** put រក្សាថ្មី Return ចាស់។ get ទទួល Key មិនមែន Index; missing return null។ containsKey បែងចែក missing ពី existing-null mapping។ getOrDefault មិនជំនួស existing null។ containsValue ជាទូទៅ O(n)។
+
+### 10.10. LinkedHashMap និង Access Order
+
+**និយមន័យ៖** តាមធម្មតារក្សាលំដាប់បញ្ចូល Keys; អាចបើកលំដាប់ចូលប្រើបាន។
+
+```java
+Map<String, Integer> access = new LinkedHashMap<>(16, 0.75f, true);
+access.put("A", 10);
+access.put("B", 20);
+access.get("A"); // លំដាប់ B, A
+```
+
+**ចំណាំ៖** Constructor ធម្មតាជា insertion order; put Key ចាស់មិនផ្លាស់ទី។ លុបហើយបញ្ចូលវិញទៅចុង។ Access order ជាគ្រឹះ LRU ប៉ុន្តែមិនមាន auto-eviction ក្នុង code នេះ។
+
+### 10.11. TreeMap និង NavigableMap
+
+**និយមន័យ៖** រៀបតាម Keys មិនមែន Values។ compare == 0 ចាត់ទុកថាជា Key ដូចគ្នា។
+
+```java
+NavigableMap<Integer, String> schedule = new TreeMap<>();
+schedule.put(100, "A");
+schedule.put(300, "C");
+Integer next = schedule.ceilingKey(250); // 300
+```
+
+**ការប្រើប្រាស់៖** ស្វែងរកមុន/ក្រោយតម្លៃមួយ។ មាន firstKey, lastKey, lowerKey, floorKey, ceilingKey, higherKey។ បើការងារច្រើនមានពេលដូចគ្នា ប្រើ List ជា Value ដើម្បីមិនជំនួសការងារចាស់។
+
+### 10.12. Map Updates និង Entry Iteration
+
+**និយមន័យ៖** putIfAbsent បញ្ចូលបើគ្មាន non-null mapping; computeIfAbsent គណនាតម្លៃបើ absent/null; merge បញ្ចូល ឬផ្សំជាមួយតម្លៃចាស់។
+
+```java
+stocks.putIfAbsent("A", 10);
+stocks.computeIfAbsent("B", key -> 0);
+stocks.merge("B", 5, Integer::sum);
+for (Map.Entry<String, Integer> entry : stocks.entrySet()) {
+    System.out.println(entry.getKey() + " -> " + entry.getValue());
+}
+```
+
+**ចំណាំ៖** `key -> 0` ជា Lambda; `Integer::sum` ជា Method Reference។ នៅទីនេះប្រើជារូបមន្តខ្លីសម្រាប់គណនាតម្លៃ; នឹងរៀនលម្អិតក្នុង Modern Java។ Default Map operations មិនធានា atomicity ពេលមាន Threads ច្រើនទេ។
+
+### 10.13. Queue និង FIFO
+
+**និយមន័យ៖** FIFO ដំណើរការ Element ដែលចូលមុនមុន។ Queue interface ក៏មាន implementation អាទិភាពដែលមិនមែន FIFO ដែរ។
+
+```java
+Queue<String> queue = new ArrayDeque<>();
+queue.offer("Order A");
+queue.offer("Order B");
+String head = queue.peek(); // A; មិនលុប
+String next = queue.poll(); // A; លុប
+```
+
+**Methods៖** offer/poll/peek ផ្ដល់ special result false/null ក្នុងករណីដែលកិច្ចសន្យាកំណត់; add/remove/element ប្រើ Exception សម្រាប់ capacity/full ឬ empty តាម operation។ poll/peek លើ empty return null; remove/element លើ empty បោះ NoSuchElementException។ ArrayDeque មិនមាន fixed capacity ក្នុង Constructor; offer ជាទូទៅ true។
+
+### 10.14. Deque, ArrayDeque និង Stack
+
+**និយមន័យ៖** Deque អនុញ្ញាតបន្ថែម/យកចេញចុងទាំងពីរ។ ArrayDeque ជា implementation សម្រាប់ FIFO ឬ LIFO ដោយមិនទទួល null។
+
+```java
+Deque<String> history = new ArrayDeque<>();
+history.push("Edit name");
+history.push("Edit price");
+String undo = history.pop(); // Edit price
+history.offerLast("Task");
+String tail = history.pollLast();
+```
+
+**ការប្រើប្រាស់៖** Undo history ឬ task queue ក្នុង memory។ push/pop ជា LIFO; offerLast/pollFirst ជា FIFO។ pop លើទទេបោះ Exception; pollFirst/pollLast return null។ ជាទូទៅប្រើ Deque ជំនួស legacy Stack។
+
+### 10.15. PriorityQueue
+
+**និយមន័យ៖** យក Element តូចបំផុតតាម Natural Ordering/Comparator មុន មិនតាមលំដាប់បញ្ចូល។
+
+```java
+Queue<Integer> priorities = new PriorityQueue<>();
+priorities.offer(3);
+priorities.offer(1);
+priorities.offer(2);
+while (!priorities.isEmpty()) {
+    System.out.println(priorities.poll()); // 1, 2, 3
+}
+```
+
+**ចំណាំ៖** for-each/toString មិនធានា sorted order។ Priority ties មិនធានា FIFO; ShippingTask ក្នុង Project បន្ថែម sequence ដើម្បីបំបែក ties។ កុំកែ priority field ខណៈ Object នៅក្នុង queue។ មិនអនុញ្ញាត null។
+
+### 10.16. for-each និង Iterator
+
+**និយមន័យ៖** for-each សម្រាប់អានងាយ; Iterator តាមដានការដើរតាម Elements និងអាចលុប current element បើ implementation គាំទ្រ។
+
+```java
+Iterator<String> iterator = codes.iterator();
+while (iterator.hasNext()) {
+    if (iterator.next().equals("INVALID")) {
+        iterator.remove();
+    }
+}
+```
+
+**ចំណាំ៖** ហៅ next មុន remove; remove បានមួយដងក្នុងមួយ next។ កុំធ្វើ codes.remove ក្នុង for-each របស់ collection ធម្មតា។
+
+### 10.17. ListIterator និង removeIf
+
+**និយមន័យ៖** ListIterator អាចដើរទៅមុខ/ក្រោយ និង set/add/remove តាមទីតាំង។ removeIf លុប Elements ដែល Predicate ផ្ដល់ true។
+
+```java
+ListIterator<String> edits = codes.listIterator();
+while (edits.hasNext()) {
+    if (edits.next().equals("A")) edits.set("UPDATED-A");
+}
+products.removeIf(product -> product.getStock() == 0);
+```
+
+**ការប្រើប្រាស់៖** សម្អាតបញ្ជីផលិតផលអស់ស្តុក។ Lambda ក្នុង removeIf មានន័យថា «ពិនិត្យផលិតផលនីមួយៗ»។ ការលុបអាចបរាជ័យបើ collection មិនគាំទ្រ mutation។
+
+### 10.18. ConcurrentModificationException
+
+**និយមន័យ៖** Fail-fast iterator អាចរកឃើញការកែ structure ក្រៅ iterator ក្នុងពេល iteration។ អាចកើតសូម្បី Thread មួយ។
+
+```java
+Iterator<String> iterator = codes.iterator();
+codes.add("NEW");
+iterator.next(); // ArrayList ក្នុង Demo បោះ ConcurrentModificationException
+```
+
+**ចំណាំ៖** Fail-fast ជា best effort មិនមែនការធានា Thread Safety; កុំប្រើវាជា flow-control ឬ catch ហើយបន្ត iteration ខូច។
+
+### 10.19. Comparable និង Comparator
+
+**និយមន័យ៖** Comparable កំណត់ Natural Ordering ក្នុង Class; Comparator ជាច្បាប់ប្រៀបធៀបពីខាងក្រៅ។
+
+```java
+Comparator<Product> byPriceThenCode = Comparator.comparingLong(Product::getPriceCents)
+        .thenComparing(Product::getKey);
+products.sort(byPriceThenCode);
+products.sort(byPriceThenCode.reversed());
+```
+
+**ការប្រើប្រាស់៖** រៀបតម្លៃ រួចបំបែក ties តាម Code។ reversed ខាងលើបញ្ច្រាសទាំង comparator chain។ List.sort/Collections.sort មាន stability សម្រាប់ elements ដែល compare ស្មើ។ ប្រើ Integer.compare/Long.compare ជំនួសការដកលេខដែលអាច overflow។
+
+### 10.20. equals/hashCode និង Stable Keys
+
+**និយមន័យ៖** equals កំណត់សមភាព; equal objects ត្រូវមាន hashCode ដូចគ្នា។ Hash ដូចគ្នាមិនធានាថា Objects ស្មើ។
+
+```java
+Set<ProductKey> keys = new HashSet<>();
+keys.add(new ProductKey("A"));
+keys.add(new ProductKey("A"));
+System.out.println(keys.size()); // 1
+```
+
+**ចំណាំ៖** ProductKey ក្នុង Project ប្រើ final code សម្រាប់ equals/hashCode/compareTo ទាំងអស់។ កុំកែ field ដែលចូលរួមក្នុង equality/hash ពេល Object ជា HashMap key ឬ HashSet element ព្រោះ lookup អាចរកមិនឃើញ។ TreeSet/TreeMap ប្រើ compare == 0; Comparator តាមតម្លៃតែមួយអាចបាត់ផលិតផលដែលតម្លៃដូចគ្នា។ Product ក្នុង Demo មិន override equals; ប្រើ ProductKey សម្រាប់ identity set។
+
+### 10.21. Copies, Views និង Unmodifiable Collections
+
+**និយមន័យ៖** Copy មានរចនាសម្ព័ន្ធដាច់ពីដើម; backed view ចែករំលែករចនាសម្ព័ន្ធ/ទិន្នន័យ; unmodifiable មិនអនុញ្ញាតកែតាម reference នោះ។
+
+```java
+List<Product> mutableCopy = new ArrayList<>(original);
+List<Product> snapshot = List.copyOf(original);
+List<Product> liveView = Collections.unmodifiableList(original);
+List<Product> range = original.subList(0, 1);
+```
+
+**ចំណាំ៖** Copy ទាំងនេះជា shallow: Product objects នៅតែចែករំលែក។ List.copyOf មិនប្ដូរតាម structure ដើម; unmodifiableList ជា live view។ subList កែឃើញក្នុងដើម; structural changes ក្រៅ view អាចធ្វើឱ្យការប្រើ view លែងកំណត់ច្បាស់។ Arrays.asList(array) ជា fixed-size backed view ដែល set បាន តែ add/remove មិនបាន។ Map.keySet/values/entrySet ក៏ជា views; លុបតាម view អាចលុប mapping ដើម។
+
+### 10.22. null Policies
+
+**និយមន័យ៖** Collection implementation នីមួយៗមានច្បាប់ null ខុសគ្នា។
+
+```java
+List<String> nullable = new ArrayList<>();
+nullable.add(null); // បាន
+// List.of("A", null); // NullPointerException
+// List.copyOf(nullable); // NullPointerException
+```
+
+**ចំណាំ៖** ArrayList/LinkedList ទទួល null; HashSet/LinkedHashSet ទទួល null មួយ; HashMap/LinkedHashMap ទទួល null key មួយ និង null values។ Natural-order TreeSet/TreeMap មិនទទួល null element/key (TreeMap អាចមាន null values)។ Comparator ដែលគាំទ្រ null អាចផ្លាស់ប្ដូរច្បាប់ក្នុង Tree structures។ ArrayDeque/PriorityQueue មិនទទួល null; ConcurrentHashMap មិនទទួល null key/value; factory List.of/Set.of/Map.of មិនទទួល null។ កុំ unbox missing Integer ពី Map ដោយគ្មានការពិនិត្យ។
+
+### 10.23. Performance និងការជ្រើសរើស
+
+**និយមន័យ៖** Big-O ពិពណ៌នាកំណើនការងារតាមទំហំ input មិនមែនពេលវេលាពិតជាវិនាទី។
+
+| តម្រូវការ | ជម្រើសទូទៅ | ចំណាយសំខាន់ |
+|---|---|---|
+| អានតាម Index | ArrayList | get O(1), add ចុង amortized O(1), កែ structure កណ្ដាល O(n) |
+| បន្ថែម/លុបចុងទាំងពីរ | ArrayDeque | ជាទូទៅ amortized O(1) |
+| ពិនិត្យ unique/membership | HashSet | expected O(1) ពេល hashing ល្អ |
+| Unique តាម insertion order | LinkedHashSet | expected O(1), Memory បន្ថែម |
+| Lookup តាម Key | HashMap | expected O(1) ពេល hashing ល្អ |
+| Map តាម insertion/access order | LinkedHashMap | expected O(1), Memory បន្ថែម |
+| Sorted/range lookup | TreeSet/TreeMap | add/get/contains/remove O(log n) តាម API |
+| យកអាទិភាពមុន | PriorityQueue | offer/poll O(log n), peek O(1) |
+
+**Syntax / ឧទាហរណ៍៖**
+
+```java
+Map<ProductKey, Product> lookup = new HashMap<>();
+List<Product> display = new ArrayList<>();
+Queue<String> pending = new ArrayDeque<>();
+```
+
+**ចំណាំ៖** កុំវាស់ល្បឿនតាម Demo តូច។ គិត access pattern, Memory, ordering និង thread ownership មុនជ្រើស។
+
+### 10.24. Thread Safety ជាមូលដ្ឋាន
+
+**និយមន័យ៖** Collections ធម្មតាមិនធានាសុវត្ថិភាពសម្រាប់ការកែពី Threads ច្រើន។ Concurrent implementation ឬ locking ត្រូវជ្រើសតាម operation។
+
+```java
+Map<String, Integer> counts = new ConcurrentHashMap<>();
+counts.merge("P001", 1, Integer::sum); // Atomic update សម្រាប់ Key នេះ
+```
+
+**ចំណាំ៖** get រួច put ដាច់ពីគ្នាមិនក្លាយជា atomic workflow ទេ។ ConcurrentHashMap មិនធ្វើឱ្យ Product objects ឬ multi-key business transactions thread-safe។ synchronizedList ធ្វើ synchronized individual methods; ពេល iterate ត្រូវ lock wrapper ដដែល។ Concurrency នឹងរៀនលម្អិតនៅដំណាក់កាល JVM/Threads។
+
+### 10.25. Project Workflow និងដែនកំណត់
+
+**និយមន័យ៖** ផ្សំ Collections នីមួយៗតាមទំនួលខុសត្រូវរបស់វា ជំនួសការប្រើ structure មួយសម្រាប់គ្រប់ការងារ។
+
+```java
+Product coffee = catalog.find(new ProductKey("P001"));
+coffee.reserve(2);
+Queue<String> tasks = new ArrayDeque<>();
+tasks.offer("Pack 2 Coffee"); // បន្ថែមក្រោយ reservation ជោគជ័យ
+```
+
+**លំហូរ៖** Catalog Map ស្វែងរក/បដិសេធ Code ស្ទួន → List រក្សាការជ្រើសទំនិញ → LinkedHashSet បង្ហាញ Codes មិនស្ទួន → filter/sort copy → reserve stock → FIFO task។
+**ចំណាំ៖** List cart codes ស្ទួនអាចមានន័យថាជ្រើសផលិតផលច្រើនដង មិនត្រូវលុបស្ទួនដើម្បីគណនាចំនួនទិញដោយគ្មានច្បាប់។ Demo មិនមាន database, payment, durable queue, transaction ឬ thread-safe inventory។
+
+**ចំណុចគន្លឹះ៖** List រក្សាលំដាប់/ស្ទួន; Set រក្សា uniqueness; Map lookup តាម Key; Queue/Deque គ្រប់គ្រងការយកការងារ។ រក្សា keys ឱ្យ stable, លុបដោយ iterator/removeIf, បែងចែក copies ពី views និង unmodifiable ពី deep immutability។
+
 ## ផ្នែកបន្ទាប់ក្នុងផែនការ — មិនទាន់បានរៀនពេញលេញ
 
-Collections → equals/hashCode → Immutability → Modern Java → JVM/Concurrency → Design/Tools → Web/Database → Spring Core → Spring Boot → Backend API → JPA/Hibernate → Security/Testing → Deployment/Operations។
+equals/hashCode → Immutability → Modern Java → JVM/Concurrency → Design/Tools → Web/Database → Spring Core → Spring Boot → Backend API → JPA/Hibernate → Security/Testing → Deployment/Operations។
 
 មេរៀនថ្មីនីមួយៗនឹងបន្ថែមនិយមន័យ Syntax ឧទាហរណ៍ ការប្រើប្រាស់ និងចំណុចគន្លឹះ តាមទម្រង់លេខធំ/លេខរងដូចឯកសារនេះ។

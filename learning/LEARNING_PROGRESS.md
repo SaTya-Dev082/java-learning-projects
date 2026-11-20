@@ -29,7 +29,8 @@
 - Exception Handling whole session៖ មានកូដ Checked/Unchecked, throws, custom exception, propagation, try/catch/finally, file try-with-resources, cause/stack trace និង suppressed exceptions។ Demo និង checks ជោគជ័យ។
 - Generics៖ បានរៀនគ្រប់ចំណុចក្នុង session និងបង្កើត whole-session demo, runtime checks និង compile rejection checks។
 - និយមន័យខ្លីពីមេរៀនដំបូង៖ SHORT_DEFINITIONS_KH.md។
-- ជំហានបន្ទាប់៖ អ្នករៀនពិនិត្យ និងអនុវត្ត Generics មុនបន្ត Collections។ មិនទាន់បញ្ជាក់ថាអនុវត្តដោយខ្លួនឯងបញ្ចប់ទេ។
+- Collections៖ ចំណុច 1–5 បានពន្យល់ក្នុងឆាត; តាមសំណើអ្នករៀន ចំណុច 6–12 បញ្ចប់ជានិយមន័យខ្លីក្នុង note និង whole-session code។
+- ជំហានបន្ទាប់៖ ពិនិត្យកូដ Collections; បន្ទាប់គឺ equals/hashCode លម្អិត និង Immutability។ មិនទាន់បញ្ជាក់ការយល់ចំណុចដែលរៀនតាម note ឬការអនុវត្តដោយខ្លួនឯងថាបញ្ចប់ទេ។
 - Project សម្រាប់អនុវត្តនៅពេលក្រោយ៖ ប្រព័ន្ធគ្រប់គ្រងការបញ្ជាទិញ និងស្តុកទំនិញ។
 
 ## ផែនការតាមដាន
@@ -79,6 +80,7 @@
 | 2026-11-19 | Exception Handling whole-session implementation | File imports, finally, cause/stack trace, close order និង suppressed checks ជោគជ័យ | ពិនិត្យកូដទាំងមូល រួចបន្ត Generics |
 | 2026-11-19 | Generics whole session + short definitions from first lesson | Demo/runtime checks និង compile rejection 12 ករណីជោគជ័យ | ពិនិត្យ Generics រួចបន្ត Collections |
 | 2026-11-20 | រៀបចំកំណត់ត្រាឡើងវិញតាមទម្រង់លេខធំ/លេខរង | 9 ផ្នែកធំ និង 57 ចំណុចរង មាននិយមន័យ Syntax និងឧទាហរណ៍ | រំលឹក Generics មុនចូល Collections |
+| 2026-11-20 | Collections whole-session implementation | Demo, catalog/queue/copy/equality checks និង atomic merge check ជោគជ័យ | ពិនិត្យកូដ; បន្ត equals/hashCode |
 
 ## មេរៀនលម្អិត៖ Generics
 
@@ -86,4 +88,14 @@
 - អ្នករៀនបានឆ្លើយត្រូវអំពី validation, type safety, bounds និង raw vs wildcard; wildcard read/write គួររំលឹកតាម Demo។
 - កូដ៖ advanced/generics/GenericsDemo.java និង README.md។
 - ផ្ទៀងផ្ទាត់៖ python3 scripts/check-generics.py ពី folder learning។
+- ការអនុវត្តដោយអ្នករៀន៖ កំពុងធ្វើ មិនទាន់បញ្ជាក់ថាបញ្ចប់។
+
+## មេរៀនលម្អិត៖ Collections
+
+- ទ្រឹស្ដីក្នុងឆាត៖ Framework/Array, ArrayList, LinkedList, Sets និង Maps។
+- ចំណុច 6–12៖ អ្នករៀនស្នើឱ្យរៀនតាមនិយមន័យខ្លី និងកូដ; មិនទាន់សួរផ្ទៀងផ្ទាត់ការយល់លម្អិត។
+- កូដគ្របដណ្ដប់៖ Queue/Deque/PriorityQueue, iteration/removal, sorting, equality/keys, mutability/copies/views/null, selection/thread-safety basics និង workflow ហាង។
+- ចំណុចគួររំលឹក៖ Set duplicate មិនកាត់ size; Map.put return Value ចាស់ មិនមែនថ្មី។
+- Note៖ SHORT_DEFINITIONS_KH.md section 10 (10.1–10.25)។
+- Run៖ python3 scripts/check-collections.py ពី folder learning; ក្នុង VS Code run CollectionsDemo ឬ StoreCollectionsDemo។
 - ការអនុវត្តដោយអ្នករៀន៖ កំពុងធ្វើ មិនទាន់បញ្ជាក់ថាបញ្ចប់។
